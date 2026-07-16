@@ -1,5 +1,9 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
+// In production (Vercel), VITE_API_URL points to the deployed Railway backend.
+// In local dev, this is left unset so calls stay relative and go through the Vite proxy.
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -10,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = async (email, password) => {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -52,7 +56,9 @@ export const AuthProvider = ({ children }) => {
       body = JSON.stringify(body);
     }
 
-    const res = await fetch(url, {
+    const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+
+    const res = await fetch(fullUrl, {
       ...options,
       headers,
       body,
