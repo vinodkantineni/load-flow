@@ -1,6 +1,6 @@
 # LoadFlow — Submission Notes
 
-**Live app:** https://load-flow-git-main-vinodkantinenis-projects.vercel.app
+**Live app:** https://load-flow-jade.vercel.app/
 **Backend API:** https://load-flow-production.up.railway.app
 **Seed credentials:** all seeded accounts use password `password123` (see login screen's Quick Login panel for the full list)
 
